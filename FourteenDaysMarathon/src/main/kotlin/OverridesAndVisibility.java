@@ -13,5 +13,7 @@ public class OverridesAndVisibility {
 
         F f = new F();
         f.foo(10);
+
+        Day8_InlineAndSAMKt.sayHello("Karthik");
     }
 }

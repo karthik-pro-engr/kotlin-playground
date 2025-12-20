@@ -47,9 +47,9 @@ fun main() {
     val consumerAsIntConsumer: Consumer<Int> = consumer
     val consumerAsNumberConsumer: Consumer<Number> = consumer
 
-    val h: Holder<*> = Holder("hi")
-    write(h, "x")   // call A
-    write(h, null)  // call B
+//    val h: Holder<*> = Holder("hi")
+//    write(h, "x")   // call A
+//    write(h, null)  // call B
 
     val real: MutableList<Any> = mutableListOf("hello")
     val lst: MutableList<in Number> = real
