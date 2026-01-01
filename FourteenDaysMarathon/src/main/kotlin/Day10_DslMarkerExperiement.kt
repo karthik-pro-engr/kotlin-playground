@@ -1,4 +1,12 @@
 // NO DSL MARKER
+class Summa:Root()
+
+fun whenSumma(r:Root) {
+    when (r) {
+        is Child -> TODO()
+        is Summa -> TODO()
+    }
+}
 open class Outer {
     fun outerFun() { println("outerFun() called on Outer instance: $this") }
 
