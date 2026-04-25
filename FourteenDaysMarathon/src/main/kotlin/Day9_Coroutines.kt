@@ -16,7 +16,7 @@ class DemoLogger(private val demoName: String) {
 }
 
 // --------------------- Demo runner ---------------------
-fun main() = runBlocking<Unit> {
+fun main() = runBlocking {
     println("=== Day 9: Coroutines basics & failure modes (timestamped) ===\n")
 
       println("Demo A: coroutineScope + launch (one child fails) --- expect siblings cancelled")
@@ -27,8 +27,8 @@ fun main() = runBlocking<Unit> {
       demoSupervisorScopeLaunch()
  */
 
-   /* println("\nDemo C: async + await differences inside coroutineScope vs supervisorScope")
-    demoAsyncAwaitBehavior()*/
+//    println("\nDemo C: async + await differences inside coroutineScope vs supervisorScope")
+//    demoAsyncAwaitBehavior()
 
    /* println("\nDemo D: withTimeout -> cancellation propagation")
     demoWithTimeout()*/
@@ -202,8 +202,8 @@ suspend fun demoAsyncAwaitBehavior() {
             // If one async fails (and awaited), exception bubbles out and cancels the scope
             try {
                 L.log("parent", "awaiting d2 (this will rethrow the async exception)")
-//                val r2 = d2.await() // will throw
-//                L.log("parent", "d2.await returned: $r2 (unexpected)")
+                val r2 = d2.join() // will throw
+                L.log("parent", "d2.await returned: $r2 (unexpected)")
                 val r1 = d1.await()
                 L.log("parent", "d1.await returned: $r1")
             } catch (e: Throwable) {
