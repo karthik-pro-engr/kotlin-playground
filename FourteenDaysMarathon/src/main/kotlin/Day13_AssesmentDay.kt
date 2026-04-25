@@ -54,6 +54,26 @@ class BExec : AExec() {
 
 }
 
+class CTest { var s: String? = "ok" }
+fun test(c: CTest) {
+    if (c.s != null) {
+        println(c.s!!.length)
+    }
+}
+
+
+open class Parent
+class ChildForParent: Parent()
+
+fun Parent.show() = "parent ext"
+fun ChildForParent.show() = "child ext"
+
+open class AParent { open fun Parent.print() = println(show()) }
+class BParent: AParent() { override fun Parent.print() = println(show()) }
+
+
+
+
 
 /* Q2
 Which rule is violated here?
@@ -520,7 +540,14 @@ fun main() {
 
 //    checkAsync()
 //
-    printExtension(BExtension())
+//    printExtension(BExtension())
+
+   /* val a: AParent = BParent()
+    val p: Parent = ChildForParent()
+    a.run { p.print() }*/
+
+    val longestSubarrayWithSumK = longestSubarrayWithSumK(intArrayOf(20, 30, 40, 10, 20, 5, 2, 3), 100)
+    println(longestSubarrayWithSumK)
 
 }
 
@@ -534,6 +561,25 @@ fun test() {
         return
     }
     println("after runBlock")
+}
+
+fun longestSubarrayWithSumK(arr:IntArray, k:Int): Int{
+    var prefixSum=0
+    var left=0
+    var maxLen=0
+    for(right in arr.indices){
+        val current= arr[right]
+        prefixSum+=current
+        while(prefixSum>k) {
+            prefixSum-=arr[left]
+            left++
+        }
+        val len= right-left+1
+        if(len>maxLen){
+            maxLen=len
+        }
+    }
+    return maxLen
 }
 
 sealed interface Interface {
